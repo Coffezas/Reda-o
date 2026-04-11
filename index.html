@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Redação ☕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-input: #0f0f16;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-dark: #7c3aed;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #27273a;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139, 92, 246, 0.08), transparent);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(18, 18, 26, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.875rem;
+        }
+
+        .stat-badge span {
+            color: var(--text-secondary);
+        }
+
+        .stat-badge strong {
+            color: var(--text-primary);
+            margin-left: 0.25rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 1rem 0;
+        }
+
+        .hero-tagline {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--bg-input);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .btn-icon {
+            font-size: 1.25rem;
+        }
+
+        .main-content {
+            display: none;
+        }
+
+        .main-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .user-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-details p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .logout-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .essays-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .essay-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .essay-item:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .essay-item.urgent {
+            border-left: 3px solid var(--warning);
+        }
+
+        .essay-item.completed {
+            opacity: 0.7;
+            border-left: 3px solid var(--success);
+        }
+
+        .essay-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .essay-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .essay-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .essay-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-input);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge.urgent {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .badge.completed {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .essay-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .essay-footer {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-small {
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            border-radius: 8px;
+            width: auto;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 300px;
+            max-width: 90vw;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-color: var(--success);
+        }
+
+        .toast.error {
+            border-color: var(--danger);
+        }
+
+        .toast-icon {
+            font-size: 1.25rem;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(5px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .loading-subtext {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .error-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .error-box.show {
+            display: block;
+        }
+
+        .error-box h4 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .error-box p {
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+            .header-stats {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 1.875rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-bar {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .essay-header {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">☕</div>
+            <div>
+                <div class="logo-text">Coffee Redação</div>
+                <div class="logo-sub">Sala do Futuro</div>
+            </div>
+        </div>
+        <div class="header-stats" id="headerStats" style="display: none;">
+            <div class="stat-badge">
+                <span>📋</span>
+                <span>Redações:</span>
+                <strong id="statTotal">0</strong>
+            </div>
+            <div class="stat-badge">
+                <span>⏰</span>
+                <span>Pendentes:</span>
+                <strong id="statPending">0</strong>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <div class="container" id="loginSection">
+        <div class="hero">
+            <p class="hero-tagline">desenvolvido por um simples, mobile</p>
+            <h1 class="hero-title">
+                redação <span class="highlight">automático</span>
+            </h1>
+            <p class="hero-subtitle">
+                busca suas redações pendentes, e resolve para vc.<br>simples assim.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon">🔐</div>
+                <h3>Credenciais de acesso</h3>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Registro de Aluno (RA)</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="Ex: 000111332117sp">
+                </div>
+                <p class="input-hint">Digite seu RA completo com UF (ex: 000116813641sp)</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Senha</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="Digite sua senha">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon">⏱️</div>
+                <h3>Tempo de escrita simulado</h3>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Mínimo (min)</label>
+                    <input type="number" id="minTime" value="30" min="5" max="120">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Máximo (min)</label>
+                    <input type="number" id="maxTime" value="40" min="5" max="120">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <button class="btn" onclick="login()" id="loginBtn">
+                <span class="btn-icon">🔍</span>
+                Buscar Redações Pendentes
+            </button>
+
+            <button class="btn btn-secondary" onclick="saveAccount()">
+                <span>💾</span>
+                Salvar conta
+            </button>
+
+            <div class="error-box" id="errorBox">
+                <h4>❌ Erro na conexão</h4>
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <div class="user-bar">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div class="user-details">
+                        <h4 id="userName">Carregando...</h4>
+                        <p id="userClass">Conectando à Sala do Futuro...</p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Sair</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-icon">📝</div>
+                    <h3>Redações Pendentes</h3>
+                </div>
+                <div class="essays-list" id="essaysList">
+                    <div class="empty-state">
+                        <div class="empty-icon">⏳</div>
+                        <p>Carregando redações da Sala do Futuro...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Conectando à Sala do Futuro...</p>
+        <p class="loading-subtext" id="loadingSubtext">Autenticando...</p>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">ℹ️</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script>
+        // API Configuration - BASEADO NOS LOGS REAIS
+        const API_CONFIG = {
+            baseURL: 'https://sedintegracoes.educacao.sp.gov.br/saladofuturobffapi',
+            eduspURL: 'https://edusp-api.ip.tv',
+            endpoints: {
+                login: '/credenciais/api/LoginCompletoToken',
+                aluno: '/alunoapi/api/Aluno/ExibirAluno',
+                turmas: '/apihubintegracoes/api/v2/Turma/ListarTurmas',
+                bimestres: '/apihubintegracoes/api/v2/Bimestre/ListarBimestres',
+                mural: '/muralavisosapi/api/mural-avisos/listar-avisos-turma',
+                eduspToken: '/registration/edusp/token',
+                tasks: '/tms/task/todo',
+                taskCount: '/tms/task/todo/count',
+                categories: '/tms/task/targets/categories',
+                answer: '/tms/answer'
+            }
+        };
+
+        let authToken = null;
+        let eduspToken = null;
+        let userData = null;
+        let essays = [];
+
+        // Login com APIs REAIS - SEM FALLBACK
+        async function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                showToast('Preencha RA e senha', 'error');
+                return;
+            }
+
+            // Reset error
+            document.getElementById('errorBox').classList.remove('show');
+            
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true;
+            document.getElementById('loadingOverlay').classList.add('active');
+
+            try {
+                // 1. LOGIN - API REAL
+                updateLoadingText('Autenticando na Sala do Futuro...');
+                
+                const loginRes = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.login}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        username: username, 
+                        password: password 
+                    })
+                });
+
+                if (!loginRes.ok) {
+                    if (loginRes.status === 401) {
+                        throw new Error('RA ou senha incorretos');
+                    }
+                    throw new Error(`Erro de autenticação: ${loginRes.status}`);
+                }
+
+                const loginData = await loginRes.json();
+                authToken = loginData.token || loginData.accessToken;
+                
+                if (!authToken) {
+                    throw new Error('Token não recebido do servidor');
+                }
+
+                userData = loginData;
+
+                // 2. OBTER TOKEN EDUSP
+                updateLoadingText('Obtendo token de acesso EDUSP...');
+                await getEduspToken();
+
+                // 3. BUSCAR DADOS DO ALUNO
+                updateLoadingText('Buscando dados do aluno...');
+                await getStudentData(username);
+
+                // 4. BUSCAR REDAÇÕES REAIS
+                updateLoadingText('Buscando redações pendentes...');
+                await loadEssays();
+
+                // Mostrar conteúdo principal
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('mainContent').classList.add('active');
+                document.getElementById('headerStats').style.display = 'flex';
+
+                updateUserInterface();
+                showToast('✓ Conectado com sucesso!', 'success');
+
+            } catch (error) {
+                console.error('Erro:', error);
+                
+                // Mostrar erro REAL - não cair para demo
+                const errorBox = document.getElementById('errorBox');
+                const errorMessage = document.getElementById('errorMessage');
+                
+                errorMessage.textContent = error.message || 'Erro desconhecido ao conectar com a Sala do Futuro';
+                errorBox.classList.add('show');
+                
+                showToast('Erro: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                document.getElementById('loadingOverlay').classList.remove('active');
+            }
+        }
+
+        async function getEduspToken() {
+            try {
+                const res = await fetch(`${API_CONFIG.eduspURL}${API_CONFIG.endpoints.eduspToken}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    eduspToken = data.token || data.access_token;
+                }
+            } catch (error) {
+                console.warn('Erro ao obter EDUSP token:', error);
+                // Não falha o login se isso falhar
+            }
+        }
+
+        async function getStudentData(ra) {
+            try {
+                const res = await fetch(
+                    `${API_CONFIG.baseURL}${API_CONFIG.endpoints.aluno}?inNumRA=${ra}&inDigitoRA=&inSiglaUFRA=SP`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data) {
+                        userData = { ...userData, ...data };
+                    }
+                }
+            } catch (error) {
+                console.warn('Erro ao buscar dados do aluno:', error);
+            }
+        }
+
+        async function loadEssays() {
+            try {
+                // Buscar redações REAIS - is_essay=true
+                const res = await fetch(
+                    `${API_CONFIG.eduspURL}${API_CONFIG.endpoints.tasks}?expired_only=false&limit=100&offset=0&filter_expired=true&is_exam=false&with_answer=true&is_essay=true`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+
+                if (!res.ok) {
+                    throw new Error(`Erro ao buscar redações: ${res.status}`);
+                }
+
+                const data = await res.json();
+                
+                if (!data || !Array.isArray(data)) {
+                    throw new Error('Formato de dados inválido');
+                }
+
+                essays = processEssaysData(data);
+                
+                if (essays.length === 0) {
+                    document.getElementById('essaysList').innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">☕</div>
+                            <p>Nenhuma redação pendente encontrada!</p>
+                            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Você está em dia com suas redações.</p>
+                        </div>
+                    `;
+                } else {
+                    renderEssays();
+                }
+                
+                updateStats();
+
+            } catch (error) {
+                console.error('Erro ao carregar redações:', error);
+                throw error; // Propaga o erro - não usa fallback
+            }
+        }
+
+        function processEssaysData(data) {
+            return data.map(item => {
+                const dueDate = item.end_at || item.deadline || item.dataFim || item.end_date;
+                const now = new Date();
+                const due = dueDate ? new Date(dueDate) : null;
+                const daysLeft = due ? Math.ceil((due - now) / (1000 * 60 * 60 * 24)) : 999;
+
+                return {
+                    id: item.id || item.task_id || item.codigo,
+                    title: item.title || item.titulo || item.name || item.nome || 'Redação',
+                    teacher: item.teacher_name || item.professor || item.teacher || 'Professor',
+                    dueDate: due,
+                    daysLeft: daysLeft,
+                    description: item.description || item.descricao || item.instruction || item.enunciado || 'Sem descrição disponível',
+                    status: item.answered || item.respondido || item.completed ? 'completed' : 'pending',
+                    grade: item.grade || item.nota || null,
+                    maxGrade: item.max_grade || item.nota_maxima || 10,
+                    isUrgent: daysLeft <= 3 && daysLeft >= 0 && !(item.answered || item.respondido),
+                    url: item.url || item.link || item.access_url || '#'
+                };
+            }).filter(e => e.status === 'pending'); // Mostrar só pendentes por padrão
+        }
+
+        function renderEssays() {
+            const container = document.getElementById('essaysList');
+            
+            container.innerHTML = essays.map(essay => {
+                const daysText = essay.daysLeft < 0 ? `Atrasada ${Math.abs(essay.daysLeft)} dias` : 
+                                essay.daysLeft === 0 ? 'Vence HOJE!' : 
+                                `${essay.daysLeft} dias restantes`;
+                
+                return `
+                    <div class="essay-item ${essay.isUrgent ? 'urgent' : ''}">
+                        <div class="essay-header">
+                            <div>
+                                <h4 class="essay-title">${essay.title}</h4>
+                                <div class="essay-meta">
+                                    <span>👤 ${essay.teacher}</span>
+                                    <span>⏰ ${daysText}</span>
+                                </div>
+                            </div>
+                            ${essay.isUrgent ? '<span class="badge urgent">⚠️ Urgente</span>' : ''}
+                        </div>
+                        <p class="essay-description">${essay.description}</p>
+                        <div class="essay-footer">
+                            <a href="${essay.url}" target="_blank" class="btn btn-small">
+                                ✏️ Escrever Agora
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateStats() {
+            const pending = essays.filter(e => e.status === 'pending').length;
+            document.getElementById('statTotal').textContent = essays.length;
+            document.getElementById('statPending').textContent = pending;
+        }
+
+        function updateUserInterface() {
+            const name = userData?.nome || userData?.name || userData?.username || 'Aluno';
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userAvatar').textContent = initials;
+            
+            const turma = userData?.turma || userData?.class || userData?.turmaDescricao || '';
+            document.getElementById('userClass').textContent = turma ? `Turma: ${turma}` : 'Sala do Futuro';
+        }
+
+        function updateLoadingText(text) {
+            document.getElementById('loadingSubtext').textContent = text;
+        }
+
+        function logout() {
+            authToken = null;
+            eduspToken = null;
+            userData = null;
+            essays = [];
+            
+            document.getElementById('mainContent').classList.remove('active');
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('headerStats').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('essaysList').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">⏳</div>
+                    <p>Carregando redações da Sala do Futuro...</p>
+                </div>
+            `;
+            
+            showToast('Desconectado', 'success');
+        }
+
+        function saveAccount() {
+            const username = document.getElementById('username').value;
+            if (username) {
+                localStorage.setItem('savedRA', username);
+                showToast('RA salvo com sucesso!', 'success');
+            }
+        }
+
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            document.getElementById('toastIcon').textContent = 
+                type === 'success' ? '✓' : 
+                type === 'error' ? '✕' : 'ℹ️';
+            toast.className = 'toast show ' + type;
+            
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // Carregar RA salvo
+        window.onload = () => {
+            const saved = localStorage.getItem('savedRA');
+            if (saved) document.getElementById('username').value = saved;
+        };
+
+        // Enter para login
+        document.getElementById('password').addEventListener('keypress', e => {
+            if (e.key === 'Enter') login();
+        });
+    </script>
+</body>
+</html>

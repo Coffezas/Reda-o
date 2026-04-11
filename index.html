@@ -626,7 +626,6 @@
         </div>
     </header>
 
-    <!-- Login Section -->
     <div class="container" id="loginSection">
         <div class="hero">
             <p class="hero-tagline">desenvolvido por um simples, mobile</p>
@@ -696,7 +695,6 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <div class="container">
             <div class="user-bar">
@@ -725,24 +723,24 @@
         </div>
     </div>
 
-    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
         <p class="loading-text">Conectando à Sala do Futuro...</p>
         <p class="loading-subtext" id="loadingSubtext">Autenticando...</p>
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast">
         <span class="toast-icon" id="toastIcon">ℹ️</span>
         <span id="toastMessage">Mensagem</span>
     </div>
 
     <script>
-        // API Configuration - BASEADO NOS LOGS REAIS
+        // API Configuration - CONFIGURADO PARA O SEU CLOUDFLARE WORKER
         const API_CONFIG = {
-            baseURL: 'https://sedintegracoes.educacao.sp.gov.br/saladofuturobffapi',
-            eduspURL: 'https://edusp-api.ip.tv',
+            // Seus novos links apontando para o Worker
+            baseURL: 'https://proxycoffe.temporavel2.workers.dev/saladofuturobffapi',
+            eduspURL: 'https://proxycoffe.temporavel2.workers.dev',
+            
             endpoints: {
                 login: '/credenciais/api/LoginCompletoToken',
                 aluno: '/alunoapi/api/Aluno/ExibirAluno',
@@ -762,7 +760,7 @@
         let userData = null;
         let essays = [];
 
-        // Login com APIs REAIS - SEM FALLBACK
+        // Login com APIs REAIS - PASSANDO PELO PROXY DA CLOUDFLARE
         async function login() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
@@ -772,15 +770,12 @@
                 return;
             }
 
-            // Reset error
             document.getElementById('errorBox').classList.remove('show');
-            
             const btn = document.getElementById('loginBtn');
             btn.disabled = true;
             document.getElementById('loadingOverlay').classList.add('active');
 
             try {
-                // 1. LOGIN - API REAL
                 updateLoadingText('Autenticando na Sala do Futuro...');
                 
                 const loginRes = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.login}`, {
@@ -796,34 +791,25 @@
                 });
 
                 if (!loginRes.ok) {
-                    if (loginRes.status === 401) {
-                        throw new Error('RA ou senha incorretos');
-                    }
+                    if (loginRes.status === 401) throw new Error('RA ou senha incorretos');
                     throw new Error(`Erro de autenticação: ${loginRes.status}`);
                 }
 
                 const loginData = await loginRes.json();
                 authToken = loginData.token || loginData.accessToken;
                 
-                if (!authToken) {
-                    throw new Error('Token não recebido do servidor');
-                }
-
+                if (!authToken) throw new Error('Token não recebido do servidor');
                 userData = loginData;
 
-                // 2. OBTER TOKEN EDUSP
                 updateLoadingText('Obtendo token de acesso EDUSP...');
                 await getEduspToken();
 
-                // 3. BUSCAR DADOS DO ALUNO
                 updateLoadingText('Buscando dados do aluno...');
                 await getStudentData(username);
 
-                // 4. BUSCAR REDAÇÕES REAIS
                 updateLoadingText('Buscando redações pendentes...');
                 await loadEssays();
 
-                // Mostrar conteúdo principal
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('mainContent').classList.add('active');
                 document.getElementById('headerStats').style.display = 'flex';
@@ -833,14 +819,10 @@
 
             } catch (error) {
                 console.error('Erro:', error);
-                
-                // Mostrar erro REAL - não cair para demo
                 const errorBox = document.getElementById('errorBox');
                 const errorMessage = document.getElementById('errorMessage');
-                
-                errorMessage.textContent = error.message || 'Erro desconhecido ao conectar com a Sala do Futuro';
+                errorMessage.textContent = error.message;
                 errorBox.classList.add('show');
-                
                 showToast('Erro: ' + error.message, 'error');
             } finally {
                 btn.disabled = false;
@@ -857,212 +839,120 @@
                         'Content-Type': 'application/json'
                     }
                 });
-
                 if (res.ok) {
                     const data = await res.json();
                     eduspToken = data.token || data.access_token;
                 }
-            } catch (error) {
-                console.warn('Erro ao obter EDUSP token:', error);
-                // Não falha o login se isso falhar
-            }
+            } catch (error) { console.warn('Erro EDUSP:', error); }
         }
 
         async function getStudentData(ra) {
             try {
-                const res = await fetch(
-                    `${API_CONFIG.baseURL}${API_CONFIG.endpoints.aluno}?inNumRA=${ra}&inDigitoRA=&inSiglaUFRA=SP`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`,
-                            'Content-Type': 'application/json'
-                        }
+                const res = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.aluno}?inNumRA=${ra}&inDigitoRA=&inSiglaUFRA=SP`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
                     }
-                );
-
+                });
                 if (res.ok) {
                     const data = await res.json();
-                    if (data) {
-                        userData = { ...userData, ...data };
-                    }
+                    if (data) userData = { ...userData, ...data };
                 }
-            } catch (error) {
-                console.warn('Erro ao buscar dados do aluno:', error);
-            }
+            } catch (error) { console.warn('Erro Aluno:', error); }
         }
 
         async function loadEssays() {
             try {
-                // Buscar redações REAIS - is_essay=true
-                const res = await fetch(
-                    `${API_CONFIG.eduspURL}${API_CONFIG.endpoints.tasks}?expired_only=false&limit=100&offset=0&filter_expired=true&is_exam=false&with_answer=true&is_essay=true`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`,
-                            'Content-Type': 'application/json'
-                        }
+                const res = await fetch(`${API_CONFIG.eduspURL}${API_CONFIG.endpoints.tasks}?expired_only=false&limit=100&offset=0&filter_expired=true&is_exam=false&with_answer=true&is_essay=true`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
                     }
-                );
-
-                if (!res.ok) {
-                    throw new Error(`Erro ao buscar redações: ${res.status}`);
-                }
-
+                });
+                if (!res.ok) throw new Error(`Erro ao buscar redações: ${res.status}`);
                 const data = await res.json();
-                
-                if (!data || !Array.isArray(data)) {
-                    throw new Error('Formato de dados inválido');
-                }
-
-                essays = processEssaysData(data);
-                
+                essays = processEssaysData(data || []);
                 if (essays.length === 0) {
-                    document.getElementById('essaysList').innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-icon">☕</div>
-                            <p>Nenhuma redação pendente encontrada!</p>
-                            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Você está em dia com suas redações.</p>
-                        </div>
-                    `;
+                    document.getElementById('essaysList').innerHTML = `<div class="empty-state"><p>Nenhuma redação pendente encontrada!</p></div>`;
                 } else {
                     renderEssays();
                 }
-                
                 updateStats();
-
-            } catch (error) {
-                console.error('Erro ao carregar redações:', error);
-                throw error; // Propaga o erro - não usa fallback
-            }
+            } catch (error) { throw error; }
         }
 
         function processEssaysData(data) {
             return data.map(item => {
-                const dueDate = item.end_at || item.deadline || item.dataFim || item.end_date;
+                const dueDate = item.end_at || item.deadline;
                 const now = new Date();
                 const due = dueDate ? new Date(dueDate) : null;
                 const daysLeft = due ? Math.ceil((due - now) / (1000 * 60 * 60 * 24)) : 999;
-
                 return {
-                    id: item.id || item.task_id || item.codigo,
-                    title: item.title || item.titulo || item.name || item.nome || 'Redação',
-                    teacher: item.teacher_name || item.professor || item.teacher || 'Professor',
+                    id: item.id || item.task_id,
+                    title: item.title || 'Redação',
+                    teacher: item.teacher_name || 'Professor',
                     dueDate: due,
                     daysLeft: daysLeft,
-                    description: item.description || item.descricao || item.instruction || item.enunciado || 'Sem descrição disponível',
-                    status: item.answered || item.respondido || item.completed ? 'completed' : 'pending',
-                    grade: item.grade || item.nota || null,
-                    maxGrade: item.max_grade || item.nota_maxima || 10,
-                    isUrgent: daysLeft <= 3 && daysLeft >= 0 && !(item.answered || item.respondido),
-                    url: item.url || item.link || item.access_url || '#'
+                    description: item.description || 'Sem descrição',
+                    status: (item.answered || item.respondido) ? 'completed' : 'pending',
+                    isUrgent: daysLeft <= 3 && daysLeft >= 0 && !item.answered,
+                    url: item.url || '#'
                 };
-            }).filter(e => e.status === 'pending'); // Mostrar só pendentes por padrão
+            }).filter(e => e.status === 'pending');
         }
 
         function renderEssays() {
             const container = document.getElementById('essaysList');
-            
-            container.innerHTML = essays.map(essay => {
-                const daysText = essay.daysLeft < 0 ? `Atrasada ${Math.abs(essay.daysLeft)} dias` : 
-                                essay.daysLeft === 0 ? 'Vence HOJE!' : 
-                                `${essay.daysLeft} dias restantes`;
-                
-                return `
-                    <div class="essay-item ${essay.isUrgent ? 'urgent' : ''}">
-                        <div class="essay-header">
-                            <div>
-                                <h4 class="essay-title">${essay.title}</h4>
-                                <div class="essay-meta">
-                                    <span>👤 ${essay.teacher}</span>
-                                    <span>⏰ ${daysText}</span>
-                                </div>
-                            </div>
-                            ${essay.isUrgent ? '<span class="badge urgent">⚠️ Urgente</span>' : ''}
-                        </div>
-                        <p class="essay-description">${essay.description}</p>
-                        <div class="essay-footer">
-                            <a href="${essay.url}" target="_blank" class="btn btn-small">
-                                ✏️ Escrever Agora
-                            </a>
+            container.innerHTML = essays.map(essay => `
+                <div class="essay-item ${essay.isUrgent ? 'urgent' : ''}">
+                    <div class="essay-header">
+                        <div>
+                            <h4 class="essay-title">${essay.title}</h4>
+                            <div class="essay-meta"><span>👤 ${essay.teacher}</span><span>⏰ ${essay.daysLeft < 0 ? 'Atrasada' : essay.daysLeft + ' dias'}</span></div>
                         </div>
                     </div>
-                `;
-            }).join('');
+                    <p class="essay-description">${essay.description}</p>
+                    <div class="essay-footer"><a href="${essay.url}" target="_blank" class="btn btn-small">✏️ Escrever Agora</a></div>
+                </div>`).join('');
         }
 
         function updateStats() {
-            const pending = essays.filter(e => e.status === 'pending').length;
             document.getElementById('statTotal').textContent = essays.length;
-            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statPending').textContent = essays.length;
         }
 
         function updateUserInterface() {
-            const name = userData?.nome || userData?.name || userData?.username || 'Aluno';
-            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-            
+            const name = userData?.nome || userData?.name || 'Aluno';
+            const initials = name[0].toUpperCase();
             document.getElementById('userName').textContent = name;
             document.getElementById('userAvatar').textContent = initials;
-            
-            const turma = userData?.turma || userData?.class || userData?.turmaDescricao || '';
-            document.getElementById('userClass').textContent = turma ? `Turma: ${turma}` : 'Sala do Futuro';
+            document.getElementById('userClass').textContent = userData?.turma || 'Sala do Futuro';
         }
 
-        function updateLoadingText(text) {
-            document.getElementById('loadingSubtext').textContent = text;
-        }
+        function updateLoadingText(text) { document.getElementById('loadingSubtext').textContent = text; }
 
         function logout() {
-            authToken = null;
-            eduspToken = null;
-            userData = null;
-            essays = [];
-            
-            document.getElementById('mainContent').classList.remove('active');
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('headerStats').style.display = 'none';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('essaysList').innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">⏳</div>
-                    <p>Carregando redações da Sala do Futuro...</p>
-                </div>
-            `;
-            
-            showToast('Desconectado', 'success');
+            location.reload(); // Recarrega para limpar tudo
         }
 
         function saveAccount() {
-            const username = document.getElementById('username').value;
-            if (username) {
-                localStorage.setItem('savedRA', username);
-                showToast('RA salvo com sucesso!', 'success');
-            }
+            localStorage.setItem('savedRA', document.getElementById('username').value);
+            showToast('RA salvo!', 'success');
         }
 
         function showToast(message, type = '') {
             const toast = document.getElementById('toast');
             document.getElementById('toastMessage').textContent = message;
-            document.getElementById('toastIcon').textContent = 
-                type === 'success' ? '✓' : 
-                type === 'error' ? '✕' : 'ℹ️';
             toast.className = 'toast show ' + type;
-            
             setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        // Carregar RA salvo
         window.onload = () => {
             const saved = localStorage.getItem('savedRA');
             if (saved) document.getElementById('username').value = saved;
         };
-
-        // Enter para login
-        document.getElementById('password').addEventListener('keypress', e => {
-            if (e.key === 'Enter') login();
-        });
     </script>
 </body>
 </html>

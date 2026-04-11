@@ -23,11 +23,7 @@
             --danger: #ef4444;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -63,48 +59,30 @@
             z-index: 100;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.25rem;
             box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
         }
 
         .logo-text {
-            font-weight: 700;
-            font-size: 1.25rem;
+            font-weight: 700; font-size: 1.25rem;
             background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .logo-sub {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
+        .logo-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
 
-        .header-stats {
-            display: flex;
-            gap: 1rem;
-        }
+        .header-stats { display: flex; gap: 1rem; }
 
         .stat-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
             padding: 0.5rem 1rem;
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -112,493 +90,79 @@
             font-size: 0.875rem;
         }
 
-        .stat-badge span {
-            color: var(--text-secondary);
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .hero { text-align: center; margin-bottom: 2.5rem; padding: 1rem 0; }
+
+        .hero-tagline { font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+
+        .hero-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.2; }
+
+        .hero-title .highlight { background: linear-gradient(135deg, var(--accent-light), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        .hero-subtitle { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; max-width: 500px; margin: 0 auto; }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem; margin-bottom: 1.5rem; }
+
+        .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+
+        .card-header-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+
+        .form-group { margin-bottom: 1.25rem; }
+
+        .form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem; }
+
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: 100%; padding: 0.875rem 1rem; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: var(--text-primary); font-size: 1rem; transition: all 0.2s;
         }
 
-        .stat-badge strong {
-            color: var(--text-primary);
-            margin-left: 0.25rem;
-        }
+        input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1); }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            padding: 1rem 0;
-        }
-
-        .hero-tagline {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-        }
-
-        .hero-title .highlight {
-            background: linear-gradient(135deg, var(--accent-light), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .card-header-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .card-header h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="number"] {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-        }
-
-        input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .input-hint {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
         .btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-family: inherit;
+            width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; border-radius: 12px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
 
-        .btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
-        }
+        .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4); }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            margin-top: 0.75rem;
-        }
+        .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); margin-top: 0.75rem; }
 
-        .btn-secondary:hover:not(:disabled) {
-            background: var(--bg-input);
-            border-color: var(--accent);
-            color: var(--text-primary);
-        }
+        .main-content { display: none; }
 
-        .btn-icon {
-            font-size: 1.25rem;
-        }
+        .main-content.active { display: block; animation: fadeIn 0.5s ease; }
 
-        .main-content {
-            display: none;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .main-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
+        .user-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 1.5rem; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .user-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
 
-        .user-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-        }
+        .essays-list { display: flex; flex-direction: column; gap: 1rem; }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+        .essay-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; transition: all 0.2s; }
 
-        .user-avatar {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.125rem;
-        }
+        .essay-item:hover { border-color: var(--accent); transform: translateX(4px); }
 
-        .user-details h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
+        .error-box { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); border-radius: 12px; padding: 1rem; margin-top: 1rem; display: none; }
 
-        .user-details p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
+        .error-box.show { display: block; }
 
-        .logout-btn {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(5px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999; }
 
-        .logout-btn:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
+        .loading-overlay.active { display: flex; }
 
-        .essays-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        .loading-spinner { width: 60px; height: 60px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1.5rem; }
 
-        .essay-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.25rem;
-            transition: all 0.2s;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .essay-item:hover {
-            border-color: var(--accent);
-            transform: translateX(4px);
-        }
+        .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--border); padding: 1rem 1.5rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); opacity: 0; transition: all 0.3s; z-index: 1000; }
 
-        .essay-item.urgent {
-            border-left: 3px solid var(--warning);
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        .essay-item.completed {
-            opacity: 0.7;
-            border-left: 3px solid var(--success);
-        }
-
-        .essay-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 0.75rem;
-        }
-
-        .essay-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-
-        .essay-meta {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .essay-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-        }
-
-        .badge {
-            padding: 0.25rem 0.75rem;
-            background: var(--bg-input);
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .badge.urgent {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--warning);
-        }
-
-        .badge.completed {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-        }
-
-        .essay-description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .essay-footer {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .btn-small {
-            padding: 0.625rem 1rem;
-            font-size: 0.875rem;
-            border-radius: 8px;
-            width: auto;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1.5rem;
-            color: var(--text-muted);
-        }
-
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            min-width: 300px;
-            max-width: 90vw;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            border-color: var(--success);
-        }
-
-        .toast.error {
-            border-color: var(--danger);
-        }
-
-        .toast-icon {
-            font-size: 1.25rem;
-        }
-
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(5px);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
-
-        .loading-overlay.active {
-            display: flex;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1.5rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .loading-subtext {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        .error-box {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid var(--danger);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .error-box.show {
-            display: block;
-        }
-
-        .error-box h4 {
-            color: var(--danger);
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        .error-box p {
-            color: var(--text-secondary);
-            font-size: 0.8125rem;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 640px) {
-            .header-stats {
-                display: none;
-            }
-            
-            .hero-title {
-                font-size: 1.875rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .user-bar {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .essay-header {
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-        }
+        @media (max-width: 640px) { .header-stats { display: none; } .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -613,340 +177,170 @@
             </div>
         </div>
         <div class="header-stats" id="headerStats" style="display: none;">
-            <div class="stat-badge">
-                <span>📋</span>
-                <span>Redações:</span>
-                <strong id="statTotal">0</strong>
-            </div>
-            <div class="stat-badge">
-                <span>⏰</span>
-                <span>Pendentes:</span>
-                <strong id="statPending">0</strong>
-            </div>
+            <div class="stat-badge"><span>📋</span><strong>0</strong></div>
         </div>
     </header>
 
     <div class="container" id="loginSection">
         <div class="hero">
-            <p class="hero-tagline">desenvolvido por um simples, mobile</p>
-            <h1 class="hero-title">
-                redação <span class="highlight">automático</span>
-            </h1>
-            <p class="hero-subtitle">
-                busca suas redações pendentes, e resolve para vc.<br>simples assim.
-            </p>
+            <p class="hero-tagline">mobile developer tool</p>
+            <h1 class="hero-title">redação <span class="highlight">automática</span></h1>
+            <p class="hero-subtitle">Busque e organize suas tarefas da Sala do Futuro.</p>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <div class="card-header-icon">🔐</div>
-                <h3>Credenciais de acesso</h3>
-            </div>
-
+            <div class="card-header"><div class="card-header-icon">🔐</div><h3>Acesso</h3></div>
             <div class="form-group">
-                <label class="form-label">Registro de Aluno (RA)</label>
-                <div class="input-wrapper">
-                    <input type="text" id="username" placeholder="Ex: 000111332117sp">
-                </div>
-                <p class="input-hint">Digite seu RA completo com UF (ex: 000116813641sp)</p>
+                <label class="form-label">RA Aluno</label>
+                <input type="text" id="username" placeholder="000111222333sp">
             </div>
-
             <div class="form-group">
                 <label class="form-label">Senha</label>
-                <div class="input-wrapper">
-                    <input type="password" id="password" placeholder="Digite sua senha">
-                </div>
+                <input type="password" id="password" placeholder="Sua senha">
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-header-icon">⏱️</div>
-                <h3>Tempo de escrita simulado</h3>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Mínimo (min)</label>
-                    <input type="number" id="minTime" value="30" min="5" max="120">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Máximo (min)</label>
-                    <input type="number" id="maxTime" value="40" min="5" max="120">
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <button class="btn" onclick="login()" id="loginBtn">
-                <span class="btn-icon">🔍</span>
-                Buscar Redações Pendentes
-            </button>
-
-            <button class="btn btn-secondary" onclick="saveAccount()">
-                <span>💾</span>
-                Salvar conta
-            </button>
-
             <div class="error-box" id="errorBox">
-                <h4>❌ Erro na conexão</h4>
-                <p id="errorMessage"></p>
+                <h4 style="color: var(--danger);">❌ Erro</h4>
+                <p id="errorMessage" style="font-size: 0.8rem; color: var(--text-secondary);"></p>
             </div>
+        </div>
+
+        <div class="card">
+            <button class="btn" onclick="login()" id="loginBtn">🔍 Buscar Redações</button>
+            <button class="btn btn-secondary" onclick="saveAccount()">💾 Salvar RA</button>
         </div>
     </div>
 
     <div class="main-content" id="mainContent">
         <div class="container">
             <div class="user-bar">
-                <div class="user-info">
-                    <div class="user-avatar" id="userAvatar">U</div>
-                    <div class="user-details">
-                        <h4 id="userName">Carregando...</h4>
-                        <p id="userClass">Conectando à Sala do Futuro...</p>
-                    </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div><h4 id="userName">Aluno</h4><p id="userClass" style="font-size: 0.8rem; color: var(--text-muted);">Turma</p></div>
                 </div>
-                <button class="logout-btn" onclick="logout()">Sair</button>
+                <button onclick="location.reload()" style="background: none; border: 1px solid var(--border); color: var(--text-secondary); padding: 0.5rem; border-radius: 8px; cursor: pointer;">Sair</button>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-icon">📝</div>
-                    <h3>Redações Pendentes</h3>
-                </div>
-                <div class="essays-list" id="essaysList">
-                    <div class="empty-state">
-                        <div class="empty-icon">⏳</div>
-                        <p>Carregando redações da Sala do Futuro...</p>
-                    </div>
-                </div>
-            </div>
+            <div class="essays-list" id="essaysList"></div>
         </div>
     </div>
 
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
-        <p class="loading-text">Conectando à Sala do Futuro...</p>
-        <p class="loading-subtext" id="loadingSubtext">Autenticando...</p>
+        <p id="loadingSubtext">Conectando...</p>
     </div>
 
-    <div class="toast" id="toast">
-        <span class="toast-icon" id="toastIcon">ℹ️</span>
-        <span id="toastMessage">Mensagem</span>
-    </div>
+    <div class="toast" id="toast">Mensagem</div>
 
     <script>
-        // API Configuration - CONFIGURADO PARA O SEU CLOUDFLARE WORKER
         const API_CONFIG = {
-            // Seus novos links apontando para o Worker
             baseURL: 'https://proxycoffe.temporavel2.workers.dev/saladofuturobffapi',
             eduspURL: 'https://proxycoffe.temporavel2.workers.dev',
-            
             endpoints: {
                 login: '/credenciais/api/LoginCompletoToken',
                 aluno: '/alunoapi/api/Aluno/ExibirAluno',
-                turmas: '/apihubintegracoes/api/v2/Turma/ListarTurmas',
-                bimestres: '/apihubintegracoes/api/v2/Bimestre/ListarBimestres',
-                mural: '/muralavisosapi/api/mural-avisos/listar-avisos-turma',
                 eduspToken: '/registration/edusp/token',
-                tasks: '/tms/task/todo',
-                taskCount: '/tms/task/todo/count',
-                categories: '/tms/task/targets/categories',
-                answer: '/tms/answer'
+                tasks: '/tms/task/todo'
             }
         };
 
         let authToken = null;
-        let eduspToken = null;
         let userData = null;
-        let essays = [];
 
-        // Login com APIs REAIS - PASSANDO PELO PROXY DA CLOUDFLARE
         async function login() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
 
-            if (!username || !password) {
-                showToast('Preencha RA e senha', 'error');
-                return;
-            }
+            if (!username || !password) return showToast('Preencha os campos', 'error');
 
             document.getElementById('errorBox').classList.remove('show');
-            const btn = document.getElementById('loginBtn');
-            btn.disabled = true;
             document.getElementById('loadingOverlay').classList.add('active');
 
             try {
-                updateLoadingText('Autenticando na Sala do Futuro...');
+                document.getElementById('loadingSubtext').textContent = "Autenticando...";
                 
                 const loginRes = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.login}`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        username: username, 
-                        password: password 
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
                 });
 
-                if (!loginRes.ok) {
-                    if (loginRes.status === 401) throw new Error('RA ou senha incorretos');
-                    throw new Error(`Erro de autenticação: ${loginRes.status}`);
+                // LER COMO TEXTO PRIMEIRO PARA EVITAR ERRO DE JSON VAZIO
+                const rawResponse = await loginRes.text();
+                
+                if (!rawResponse || rawResponse.trim() === "") {
+                    throw new Error("O servidor do governo enviou uma resposta vazia. Verifique seu RA e Senha.");
                 }
 
-                const loginData = await loginRes.json();
+                let loginData;
+                try {
+                    loginData = JSON.parse(rawResponse);
+                } catch(e) {
+                    throw new Error("Resposta inválida do servidor. Tente novamente mais tarde.");
+                }
+
+                if (!loginRes.ok) {
+                    throw new Error(loginData.mensagem || loginData.error || "Erro nas credenciais.");
+                }
+
                 authToken = loginData.token || loginData.accessToken;
-                
-                if (!authToken) throw new Error('Token não recebido do servidor');
                 userData = loginData;
 
-                updateLoadingText('Obtendo token de acesso EDUSP...');
-                await getEduspToken();
-
-                updateLoadingText('Buscando dados do aluno...');
-                await getStudentData(username);
-
-                updateLoadingText('Buscando redações pendentes...');
+                document.getElementById('loadingSubtext').textContent = "Buscando redações...";
                 await loadEssays();
 
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('mainContent').classList.add('active');
-                document.getElementById('headerStats').style.display = 'flex';
-
-                updateUserInterface();
-                showToast('✓ Conectado com sucesso!', 'success');
+                updateUI();
 
             } catch (error) {
-                console.error('Erro:', error);
-                const errorBox = document.getElementById('errorBox');
-                const errorMessage = document.getElementById('errorMessage');
-                errorMessage.textContent = error.message;
-                errorBox.classList.add('show');
-                showToast('Erro: ' + error.message, 'error');
+                document.getElementById('errorMessage').textContent = error.message;
+                document.getElementById('errorBox').classList.add('show');
             } finally {
-                btn.disabled = false;
                 document.getElementById('loadingOverlay').classList.remove('active');
             }
         }
 
-        async function getEduspToken() {
-            try {
-                const res = await fetch(`${API_CONFIG.eduspURL}${API_CONFIG.endpoints.eduspToken}`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    eduspToken = data.token || data.access_token;
-                }
-            } catch (error) { console.warn('Erro EDUSP:', error); }
-        }
-
-        async function getStudentData(ra) {
-            try {
-                const res = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.aluno}?inNumRA=${ra}&inDigitoRA=&inSiglaUFRA=SP`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data) userData = { ...userData, ...data };
-                }
-            } catch (error) { console.warn('Erro Aluno:', error); }
-        }
-
         async function loadEssays() {
             try {
-                const res = await fetch(`${API_CONFIG.eduspURL}${API_CONFIG.endpoints.tasks}?expired_only=false&limit=100&offset=0&filter_expired=true&is_exam=false&with_answer=true&is_essay=true`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json'
-                    }
+                const res = await fetch(`${API_CONFIG.eduspURL}${API_CONFIG.endpoints.tasks}?limit=50&is_essay=true`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
                 });
-                if (!res.ok) throw new Error(`Erro ao buscar redações: ${res.status}`);
                 const data = await res.json();
-                essays = processEssaysData(data || []);
-                if (essays.length === 0) {
-                    document.getElementById('essaysList').innerHTML = `<div class="empty-state"><p>Nenhuma redação pendente encontrada!</p></div>`;
-                } else {
-                    renderEssays();
+                const container = document.getElementById('essaysList');
+                
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">Nenhuma redação pendente!</p>';
+                    return;
                 }
-                updateStats();
-            } catch (error) { throw error; }
-        }
 
-        function processEssaysData(data) {
-            return data.map(item => {
-                const dueDate = item.end_at || item.deadline;
-                const now = new Date();
-                const due = dueDate ? new Date(dueDate) : null;
-                const daysLeft = due ? Math.ceil((due - now) / (1000 * 60 * 60 * 24)) : 999;
-                return {
-                    id: item.id || item.task_id,
-                    title: item.title || 'Redação',
-                    teacher: item.teacher_name || 'Professor',
-                    dueDate: due,
-                    daysLeft: daysLeft,
-                    description: item.description || 'Sem descrição',
-                    status: (item.answered || item.respondido) ? 'completed' : 'pending',
-                    isUrgent: daysLeft <= 3 && daysLeft >= 0 && !item.answered,
-                    url: item.url || '#'
-                };
-            }).filter(e => e.status === 'pending');
-        }
-
-        function renderEssays() {
-            const container = document.getElementById('essaysList');
-            container.innerHTML = essays.map(essay => `
-                <div class="essay-item ${essay.isUrgent ? 'urgent' : ''}">
-                    <div class="essay-header">
-                        <div>
-                            <h4 class="essay-title">${essay.title}</h4>
-                            <div class="essay-meta"><span>👤 ${essay.teacher}</span><span>⏰ ${essay.daysLeft < 0 ? 'Atrasada' : essay.daysLeft + ' dias'}</span></div>
-                        </div>
+                container.innerHTML = data.map(task => `
+                    <div class="essay-item">
+                        <h4>${task.title || 'Redação'}</h4>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin: 0.5rem 0;">${task.description || 'Sem descrição'}</p>
+                        <a href="${task.url || '#'}" target="_blank" class="btn" style="padding: 0.5rem; font-size: 0.8rem; margin-top: 0.5rem;">Escrever</a>
                     </div>
-                    <p class="essay-description">${essay.description}</p>
-                    <div class="essay-footer"><a href="${essay.url}" target="_blank" class="btn btn-small">✏️ Escrever Agora</a></div>
-                </div>`).join('');
+                `).join('');
+            } catch (e) {
+                console.error(e);
+            }
         }
 
-        function updateStats() {
-            document.getElementById('statTotal').textContent = essays.length;
-            document.getElementById('statPending').textContent = essays.length;
-        }
-
-        function updateUserInterface() {
-            const name = userData?.nome || userData?.name || 'Aluno';
-            const initials = name[0].toUpperCase();
+        function updateUI() {
+            const name = userData?.nome || "Aluno";
             document.getElementById('userName').textContent = name;
-            document.getElementById('userAvatar').textContent = initials;
-            document.getElementById('userClass').textContent = userData?.turma || 'Sala do Futuro';
-        }
-
-        function updateLoadingText(text) { document.getElementById('loadingSubtext').textContent = text; }
-
-        function logout() {
-            location.reload(); // Recarrega para limpar tudo
+            document.getElementById('userAvatar').textContent = name[0].toUpperCase();
+            document.getElementById('userClass').textContent = userData?.turma || "Sala do Futuro";
         }
 
         function saveAccount() {
             localStorage.setItem('savedRA', document.getElementById('username').value);
-            showToast('RA salvo!', 'success');
+            showToast('RA salvo!');
         }
 
-        function showToast(message, type = '') {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').textContent = message;
-            toast.className = 'toast show ' + type;
-            setTimeout(() => toast.classList.remove('show'), 4000);
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
 
         window.onload = () => {

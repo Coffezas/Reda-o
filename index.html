@@ -672,9 +672,8 @@
     </div>
 
     <script>
-        // ✅ SUA URL DO CLOUDFLARE TUNNEL
+        // ✅ SUA URL DO CLOUDFLARE TUNNEL - ATUALIZE AQUI!
         const API_URL = 'https://cardiovascular-new-counseling-mike.trycloudflare.com';
-
         let authToken = null;
         let userData = null;
         let essays = [];
@@ -697,24 +696,21 @@
             try {
                 updateLoadingText('Autenticando...');
                 
-                const response = await fetch(API_URL, {
+                // CHAMA DIRETO /api/login
+                const response = await fetch(`${API_URL}/api/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({
-                        endpoint: '/api/login',
-                        method: 'POST',
-                        body: { username, password }
-                    })
+                    body: JSON.stringify({ username, password })
                 });
 
                 console.log('Status:', response.status);
 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Erro ${response.status}: ${errorText || 'Credenciais inválidas'}`);
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `Erro ${response.status}: Credenciais inválidas`);
                 }
 
                 const data = await response.json();
@@ -728,55 +724,34 @@
                 }
 
                 updateLoadingText('Buscando redações...');
-                await loadEssays();
+                
+                // CHAMA DIRETO /api/redacoes
+                const essaysResponse = await fetch(`${API_URL}/api/redacoes`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Accept': 'application/json'
+                    }
+                });
 
+                if (!essaysResponse.ok) {
+                    throw new Error('Erro ao buscar redações');
+                }
+
+                const essaysData = await essaysResponse.json();
+                console.log('Redações:', essaysData);
+                
+                if (!Array.isArray(essaysData)) {
+                    throw new Error('Formato inválido de redações');
+                }
+
+                essays = processEssaysData(essaysData);
+                
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('mainContent').classList.add('active');
                 document.getElementById('headerStats').style.display = 'flex';
 
                 updateUserInterface();
-                showToast('✓ Conectado!', 'success');
-
-            } catch (error) {
-                console.error('Erro:', error);
-                
-                const errorBox = document.getElementById('errorBox');
-                document.getElementById('errorMessage').textContent = error.message;
-                errorBox.classList.add('show');
-                
-                showToast('Erro: ' + error.message, 'error');
-            } finally {
-                btn.disabled = false;
-                document.getElementById('loadingOverlay').classList.remove('active');
-            }
-        }
-
-        async function loadEssays() {
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${authToken}`
-                    },
-                    body: JSON.stringify({
-                        endpoint: '/api/redacoes',
-                        method: 'GET'
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Erro ao buscar: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Redações:', data);
-                
-                if (!Array.isArray(data)) {
-                    throw new Error('Formato inválido');
-                }
-
-                essays = processEssaysData(data);
                 
                 if (essays.length === 0) {
                     document.getElementById('essaysList').innerHTML = `
@@ -790,10 +765,19 @@
                 }
                 
                 updateStats();
+                showToast('✓ Conectado!', 'success');
 
             } catch (error) {
-                console.error('Erro redações:', error);
-                throw error;
+                console.error('Erro:', error);
+                
+                const errorBox = document.getElementById('errorBox');
+                document.getElementById('errorMessage').textContent = error.message;
+                errorBox.classList.add('show');
+                
+                showToast('Erro: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                document.getElementById('loadingOverlay').classList.remove('active');
             }
         }
 
